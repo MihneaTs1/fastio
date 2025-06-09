@@ -124,9 +124,27 @@ public:
                 c = nextChar();
             }
             return s;
+        } else if constexpr (std::is_same_v<T, char>) {
+            // char specialization: reads next non-whitespace character
+            int c = skipWhitespace();
+            if (c == EOF) return 0;
+            return static_cast<char>(c);
         } else {
             static_assert(sizeof(T) == 0, "Unsupported type for FastIO::next()");
         }
+    }
+
+    // char* overload: reads a word into the provided buffer (like std::cin >> buf)
+    // The user must provide the buffer and its size
+    void next(char* s, std::size_t n) noexcept {
+        if (!s || n == 0) return;
+        int c = skipWhitespace();
+        std::size_t i = 0;
+        while (c != EOF && c > 32 && i + 1 < n) {
+            s[i++] = static_cast<char>(c);
+            c = nextChar();
+        }
+        s[i] = '\0';
     }
 
 private:
