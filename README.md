@@ -43,7 +43,19 @@ A benchmark is provided in `benchmark.cpp` to compare FastIO's performance for v
 - Generates large datasets for `int`, `long long`, `double`, `bool`, `std::string`, `char`, and C-style strings (`char*`).
 - Measures throughput (MB/s) and total time to read all values.
 
-To run the benchmark:
+### Build and Run with Makefile
+
+A `Makefile` is provided for convenience:
+
+```sh
+make        # Builds the benchmark executable
+make run    # Builds and runs the benchmark
+make clean  # Removes the executable and generated data files
+```
+
+### Manual Build
+
+You can also build manually:
 
 ```sh
 g++ -Ofast -std=c++17 benchmark.cpp -o benchmark
